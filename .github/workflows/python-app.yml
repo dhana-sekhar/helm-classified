@@ -100,6 +100,7 @@ jobs:
         make build
     - name: Update Kubernetes deployment
       run: |
+        make cleanall  
         make runall
         # kubectl set image deployment/myapp-deployment myapp-container=${{ secrets.DOCKER_USERNAME }}/myapp:${{ github.sha }}
         # kubectl rollout status deployment/myapp-deployment
