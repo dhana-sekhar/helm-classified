@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.appName }}
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.appName }}
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.appName }}
+    spec:
+      containers:
+      - name: {{ .Values.appName }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        ports:
+        - containerPort: {{ .Values.service.port }}
+        env:
+        - name: JUPYTER_TOKEN
+          value: "sekhar"  # Static token
+        # - name: PORT
+        #   valueFrom:
+        #     configMapKeyRef:
+        #       name: {{ .Values.configMapName }}
+        #       key: jupyter-port          
+      #   volumeMounts:
+      #   - mountPath: /workspace  # Path inside the container
+      #     name: jupyterlab-storage
+      # volumes:
+      # - name: jupyterlab-storage
+      #   persistentVolumeClaim:
+      #     claimName: jupyterlab-pvc

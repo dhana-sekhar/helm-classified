@@ -1,0 +1,15 @@
+# work in progress dont look into this (working on helmfile sync)
+
+releases:
+  - name: my-release-dev
+    chart: ./my-first-chart
+    values:
+      - values-dev.yaml
+  - name: my-release-staging
+    chart: ./my-first-chart
+    values:
+      - values-staging.yaml
+  - name: my-release-prod
+    chart: ./my-first-chart
+    values:
+      - values-prod.yaml
