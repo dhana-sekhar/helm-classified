@@ -92,10 +92,10 @@ jobs:
     steps:
     - name: Set Kubernetes context to local
       run: |
-        kubectl config use-context minikube  # Or minikube, depending on your setup
+        # kubectl config use-context minikube  # Or minikube, depending on your setup
 
     - name: Update Kubernetes deployment
       run: |
         make runall
-        kubectl set image deployment/myapp-deployment myapp-container=${{ secrets.DOCKER_USERNAME }}/myapp:${{ github.sha }}
-        kubectl rollout status deployment/myapp-deployment
+        # kubectl set image deployment/myapp-deployment myapp-container=${{ secrets.DOCKER_USERNAME }}/myapp:${{ github.sha }}
+        # kubectl rollout status deployment/myapp-deployment
