@@ -85,8 +85,8 @@ upgradeprod:
 
 
 # Uninstall all releases
-.PHONY: clean
-clean: uninstalldev uninstalluat uninstallprod
+.PHONY: cleanall
+cleanall: uninstalldev uninstalluat uninstallprod
 
 .PHONY: uninstalldev
 uninstalldev:
