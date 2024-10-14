@@ -10,6 +10,7 @@ PYLINT=pylint
 SRC=src
 TESTS=tests
 DOCKER_IMAGE=sekharbuddha/gitactions:latest
+DOCKER_IMAGE_JUPYTER=sekharbuddha/testkube:latest
 
 # Run both pytest and flake8
 .PHONY: all
@@ -36,6 +37,18 @@ build:
 	docker build -t $(DOCKER_IMAGE) .
 	docker images |grep gitaction
 	docker push $(DOCKER_IMAGE)
+	@echo "Build successful!"
+
+# Build step (customize as needed)
+.PHONY: buildjupyter
+buildjupyter:
+	@echo "Building the project..."
+	@echo "Login to Docker"
+	docker login
+	@echo "Login successful"
+	docker build -f Dockerfile_jupyter -t $(DOCKER_IMAGE_JUPYTER) .
+	docker images |grep gitaction
+	docker push $(DOCKER_IMAGE_JUPYTER)
 	@echo "Build successful!"
 
 # Clean up temporary files (optional)
